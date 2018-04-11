@@ -19,7 +19,7 @@ import frsf.isi.died.tp.util.Ordenable;
  * 
  * @author mdominguez
  */
-public abstract class MaterialCapacitacion {
+public abstract class MaterialCapacitacion implements Ordenable {
 	protected Integer id;
 	/**
 	 * Titulo del material
@@ -116,7 +116,13 @@ public abstract class MaterialCapacitacion {
 		
 	}
 	
+	@Override
+	public final int valor() {
+		
+		return (this.precio().intValue());
+	}
 	
-	// TODO 10: implementar Ordenable
+	/* esto se debe a que java busca dinamicamente en las clases hijas el metodo que le corresponde
+	 * segun la clase que lo llama */
 
 }
