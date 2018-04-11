@@ -39,6 +39,11 @@ public class BibliotecaArray implements Biblioteca{
 		// TODO 06: se agrega un material al arreglo de materiales de capacitacion si hay espacio en el arreglo
 		// caso contrario el metodo no agrega ningun elemento y termina su ejecución
 		
+		if(this.materialCapacitacion.length<10) {
+			this.materialCapacitacion[cantidadMaterial +1] = material;
+		}
+		
+		
 	}
 
 	@Override
