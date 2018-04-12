@@ -119,7 +119,7 @@ public abstract class MaterialCapacitacion implements Ordenable {
 	@Override
 	public final int valor() {
 		
-		return (this.precio().intValue());
+		return this.precio().intValue();
 	}
 	
 	/* esto se debe a que java busca dinamicamente en las clases hijas el metodo que le corresponde

@@ -83,16 +83,19 @@ public class ListaServiceRadix extends ListasService {
 			// calcular la base de la posicion actual
 			// para la unidad es 1, para la decena 10, para la centena 100
 			// asi el numero 237 se puede descomponer en 2*100 + 3*10 + 7* 1
-			int peso = (int) Math.pow(10.0, i+1);
+			int peso = (int) Math.pow(10.0, i);
 
 			for (Ordenable mat : this.arregloOrdenable) {
-				if(mat.valor()%peso<mat.valor()) {
-			   residuos[mat.valor() % peso][cantidadPorFila[mat.valor() % peso]]= mat;
-			   cantidadPorFila[mat.valor() % peso]++;
-				}
 				// TODO 11: IMPLEMENTAR el ALGORITMO que chequea el residuo 
 				// e inserta el elemento en la posicion de la matriz de residuos
 				// e incrementa el contador en cantidadPorFila en 1
+				if(mat!=null) {
+					int precio=mat.valor();
+					Integer digito=(precio % (peso*10))/peso;
+					residuos[digito][cantidadPorFila[digito]]=mat;
+					cantidadPorFila[digito]++;
+			}
+				
 			}
 			int indiceArregloOrdenado = 0;
 			for (int j = 0; j < 10; j++) {

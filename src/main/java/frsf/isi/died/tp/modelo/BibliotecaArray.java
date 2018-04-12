@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import frsf.isi.died.tp.modelo.productos.MaterialCapacitacion;
+import frsf.isi.died.tp.util.ListaServiceRadix;
 import frsf.isi.died.tp.util.ListasService;
 
 
@@ -34,7 +35,7 @@ public class BibliotecaArray implements Biblioteca{
 		cantidadMaterial=0;
 		this.materialCapacitacion= new MaterialCapacitacion[10];
 		// TODO 13: inicializar la variable de tipo ListaService para que apunte el servicio de operaciones de listas
-		//var = ListasService((Ordenable)this.materialCapacitacion);
+		var = new ListaServiceRadix(this.materialCapacitacion);
 	}
 
 	@Override
