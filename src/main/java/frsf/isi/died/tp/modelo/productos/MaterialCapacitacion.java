@@ -19,7 +19,7 @@ import frsf.isi.died.tp.util.Ordenable;
  * 
  * @author mdominguez
  */
-public abstract class MaterialCapacitacion implements Ordenable {
+public abstract class MaterialCapacitacion implements Ordenable, Comparable<MaterialCapacitacion> {
 	protected Integer id;
 	/**
 	 * Titulo del material
@@ -61,8 +61,20 @@ public abstract class MaterialCapacitacion implements Ordenable {
 		this.titulo = titulo;
 		this.costo = costo;
 	}
+	
+	
+	
+	
 
 
+
+	@Override
+	public int compareTo(MaterialCapacitacion Mat) {
+		int aux=this.getTitulo().compareTo(Mat.getTitulo());
+		if(aux==0) {
+			return(this.precio().compareTo(Mat.precio()));
+		}else return aux;
+	}
 
 	/**
 	 * El precio de un material se define según el tipo del material y toma como

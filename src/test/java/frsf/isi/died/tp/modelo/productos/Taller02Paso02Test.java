@@ -39,7 +39,7 @@ public class Taller02Paso02Test {
 	public void libroVideosDistintos() {
 		Video v1 = new Video(1, "ABC");
 		Libro v2 = new Libro(1, "ABC");
-		assertTrue(v1.equals(v2));
+		assertFalse(v1.equals(v2));
 	}
 
 }
