@@ -35,5 +35,6 @@ public class Video extends MaterialCapacitacion{
 		
 		return (this instanceof Video);
 	}
+	
 
 }
