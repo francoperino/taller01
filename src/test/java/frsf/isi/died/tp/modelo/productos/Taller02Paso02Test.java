@@ -40,6 +40,7 @@ public class Taller02Paso02Test {
 		Video v1 = new Video(1, "ABC");
 		Libro v2 = new Libro(1, "ABC");
 		assertFalse(v1.equals(v2));
+
 	}
 
 }
