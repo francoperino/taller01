@@ -20,8 +20,7 @@ public class BibliotecaList implements Biblioteca {
 	}
 	@Override
 	public Integer cantidadMateriales() {
-		
-		return this.materiales.size();
+		return materiales.size();
 	}
 	@Override
 	public Integer cantidadLibros() {
@@ -65,5 +64,37 @@ public class BibliotecaList implements Biblioteca {
 		}
 			
 		
+	}
+	@Override
+	public MaterialCapacitacion buscar (Integer costo) {
+		Collections.sort(materiales, (m1,m2)-> m1.getCosto().compareTo(m2.getCosto()));
+		return buscadorBinario(0,this.cantidadMateriales(),costo);
+		
+	}
+	
+	private MaterialCapacitacion buscadorBinario(Integer i, Integer f, Integer c) {
+		if(i>=f) {
+			if(c==this.materiales.get(f).getCosto().intValue()) {
+				return this.materiales.get(f);
+			}
+			else
+			throw new RuntimeException("Material de precio "+c+" no encontrado");
+		}
+		else {
+			Integer mitad=(i+f)/2;
+			int precioMaterial=this.materiales.get(mitad).getCosto().intValue();
+			if(c==precioMaterial) {
+				return this.materiales.get(mitad);
+			}
+			else {
+				if(c<precioMaterial) {
+					return buscadorBinario(i,mitad-1,c);
+				}
+				else
+					return buscadorBinario(mitad+1,f,c);
+				
+			}
+				
+		}
 	}
 }
