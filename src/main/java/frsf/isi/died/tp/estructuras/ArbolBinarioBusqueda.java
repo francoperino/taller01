@@ -171,9 +171,21 @@ public class ArbolBinarioBusqueda extends Arbol {
 	
 	@Override
 	public MaterialCapacitacion buscar(Integer precioBuscado) {
-		int comparacion =this.valor.precio().intValue()- precioBuscado.intValue(); 
-		// TODO completar
-		return null;
+		int comparacion =this.valor.precio().intValue() - precioBuscado.intValue();
+		MaterialCapacitacion mat= null;		
+		if(comparacion ==0) {
+			mat= this.valor;
+		}
+		
+			else {
+				if(comparacion < 0) {
+					mat = this.derecho.buscar(precioBuscado);
+				}
+				else {
+					mat = this.izquierdo.buscar(precioBuscado);
+		}}
+		return mat;
+		 
 	}
 
 	@Override
@@ -181,7 +193,14 @@ public class ArbolBinarioBusqueda extends Arbol {
 		List<MaterialCapacitacion> lista = new ArrayList<MaterialCapacitacion>();
 		int comparacionPrecioMin =this.valor.precio().compareTo(precioMin);
 		int comparacionPrecioMax =this.valor.precio().compareTo(precioMax);
-
+        /*if(comparacionPrecioMin >=0 && comparacionPrecioMax <=0) {
+        	lista.add(this.valor);
+        }
+        else {
+			
+				lista.addAll( this.derecho.rango(precioMin,precioMax));
+				lista.addAll(this.izquierdo.rango(precioMin,precioMax));
+        }		*/
 		// TODO completar
 		return lista;
 	}
