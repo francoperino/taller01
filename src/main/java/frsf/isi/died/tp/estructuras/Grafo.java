@@ -217,7 +217,7 @@ public class Grafo<T> {
     }
     private List<T> buscarCaminoNSaltos(Vertice<T> n1,Vertice<T> n2,Integer saltos,HashSet<Vertice> visitados){
     	  ArrayList<T> resultado = new ArrayList<>();
-          if(saltos==0) return new ArrayList<>(); //retorno vacio
+          if(saltos==0) return new ArrayList<>(); 
           if(esAdyacente(n1, n2)&& saltos ==1) {
               resultado.add(n1.getValor());
               resultado.add(n2.getValor());
@@ -232,7 +232,7 @@ public class Grafo<T> {
                       if(!resultado2.isEmpty()) {
                           resultado.add(n1.getValor());
                           resultado.addAll(resultado2);
-                          return resultado; // termino encontre un camino
+                          return resultado; 
                       }                    
                   }
                   visitados.remove(n1);
