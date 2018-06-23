@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Grafo<T> {
 
@@ -177,24 +178,21 @@ public class Grafo<T> {
     public T primerVerticeGradoK(T v,Integer gradoK) {
     	HashSet<Vertice> visitados= new HashSet<>();
     	Vertice<T> vertice = this.getNodo(v);
-    	Queue<Vertice> cola=new LinkedList();
-    	cola.addAll(getAdyacentes(vertice));
-    	
-    	for(Vertice a: cola) {
-    	if(visitados.contains(a)) {
-    		cola.remove(a);
-    		if(getAdyacentes(a).size()==gradoK) {
-    			return (T) a;
-    		}
-    		else {
-    			cola.addAll(getAdyacentes(a));
-    			visitados.add(a);
-    			cola.remove(a);
-    			
+    	Queue<T> cola=new LinkedList();
+    	cola.add(v);
+    	while(!cola.isEmpty()) {
+    		if(!visitados.contains(cola.peek())) {
+    			if(gradoSalida(cola.peek()).intValue()==gradoK.intValue())
+    				return cola.peek();
+    			else {
+    				cola.addAll(getAdyacentes(cola.peek()));
+    				visitados.add(getNodo(cola.peek()));
+    				cola.poll();
+    			}
     		}
     	}
-    	}
-		return null;
+    		
+    	return cola.peek();
     	
     }
 
@@ -218,11 +216,31 @@ public class Grafo<T> {
          
     }
     private List<T> buscarCaminoNSaltos(Vertice<T> n1,Vertice<T> n2,Integer saltos,HashSet<Vertice> visitados){
-        ArrayList<T> resultado = new ArrayList<>();
-       //TODO
-        return resultado;
-    }
-
-
+    	  ArrayList<T> resultado = new ArrayList<>();
+          if(saltos==0) return new ArrayList<>(); //retorno vacio
+          if(esAdyacente(n1, n2)&& saltos ==1) {
+              resultado.add(n1.getValor());
+              resultado.add(n2.getValor());
+              return resultado;
+          }else{
+              List<Vertice<T>> adyacentes=null;
+              if(!visitados.contains(n1)){
+                  adyacentes = getAdyacentes(n1);
+                  visitados.add(n1);
+                  for(Vertice<T> unAdy : adyacentes){
+                      List<T> resultado2 = buscarCaminoNSaltos(unAdy,n2, saltos-1,visitados);
+                      if(!resultado2.isEmpty()) {
+                          resultado.add(n1.getValor());
+                          resultado.addAll(resultado2);
+                          return resultado; // termino encontre un camino
+                      }                    
+                  }
+                  visitados.remove(n1);
+              }                        
+              resultado.clear();
+          }
+          return resultado;
+      }
 }
+
 
